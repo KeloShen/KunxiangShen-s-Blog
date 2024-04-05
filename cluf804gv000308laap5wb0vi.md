@@ -90,8 +90,6 @@ for symbol in stock_op__dic.keys():
           "option with strike", 
           stock_op__dic[symbol]["options"]["strike"],"has price", 
           stock_op__dic[symbol]["options"]["price"])
-    
-    
 ```
 
 ```python
@@ -105,7 +103,7 @@ MSFT Put option with strike 50 has price 2.5
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1711700798193/bb189868-97ce-40fc-af79-8d0bb7990ad7.png align="center")
 
-还有python内置的round函数，本质是用来做四舍五入或者设置保留小数位数的。具体的法则可以看链接[round（）函数](https://blog.csdn.net/m0_73419365/article/details/129821610?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171170081016800185836337%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=171170081016800185836337&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-129821610-null-null.142^v100^pc_search_result_base4&utm_term=round&spm=1018.2226.3001.4187)。
+还有python内置的round函数，本质是用来做四舍五入或者设置保留小数位数的。具体的法则可以看链接[round（）函数](https://blog.csdn.net/m0_73419365/article/details/129821610?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171170081016800185836337%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=171170081016800185836337&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-129821610-null-null.142%5Ev100%5Epc_search_result_base4&utm_term=round&spm=1018.2226.3001.4187)。
 
 计算时间样例：
 
@@ -172,3 +170,31 @@ import matplotlib.pylab as plt
 > With this backend, the output of plotting commands is displayed inline within frontends like the Jupyter notebook, directly below the code cell that produced it. The resulting plots will then also be stored in the notebook document.
 
 关于这三个库各自是干什么的以及具体使用方法细节，在kaggle的网站上给了比较详细的解释，可以点击链接查看 [Numpy,Pandas and Matplotlib](https://www.kaggle.com/code/chats351/introduction-to-numpy-pandas-and-matplotlib) 。
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712296510044/2ece7e24-38f8-40b1-a39c-9ddcb1388ff5.png align="center")
+
+### Basic dataframe manipulations
+
+pd.DataFrame.keys(), pd.DataFrame.keys().values, pd.DataFrame.info(), pd.DataFrame.describe()
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712296801274/2aa25197-1658-49d5-a14b-bf8ac5df0efb.png align="center")
+
+如果想单独提取某个或某些特定位置的元素，可以使用pd.DataFrame.iloc\[ ， \]函数，第一个参数是row，第二个参数是column。
+
+也可以使用pd.DataFrame.loc\[\]函数达成一样的效果，这里的参数就可以直接使用表格中表头的名称来代表想要提取的数据。
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712297058491/c3fd3082-c6a8-49a6-b412-c0e7935faa70.png align="center")
+
+在处理大量数据的时候，会耗费非常多的时间，所以我们在使用各种函数的时候需要尽量考虑比较快的哪一个，在我们提取数据的时候，如果没有进行切片（slicing）操作，就要尽量使用pd.DataFrame.at\[\] or pd.DataFrame.iat\[\]函数，因为这两个函数比前述的loc以及iloc函数运行速度快。
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712297286738/ccbf744b-dc3e-459c-8c94-9a7b11a62b99.png align="center")
+
+如果想提取某些数据中达到你所要求门槛的数据集，你可以使用嵌套的操作来提取
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712297461345/c0342bb1-597a-4cb8-97c4-95018111528b.png align="center")
+
+如果你有一个自己自定义的函数需要对数据集进行操作，那么你可以使用pd.DataFrame.apply(***func*, *axis=0*, *raw=False*, *result\_type=None*, *args=()*, *by\_row='compat'*, *engine='python'*, *engine\_kwargs=None*, *\*\*kwargs***)函数来进行操作
+
+func就是你自定义的函数，args是你自定义函数的参数（注意是元组形式）
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712297944076/1571f998-9a9e-4c29-84ea-6b5e9b621be8.png align="center")
